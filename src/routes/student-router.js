@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+import * as studentService from "../service/student-service.js";
 
 // GET all students
 router.get("/", async (req, res) => {
@@ -16,13 +17,28 @@ router.get("/:id", async (req, res) => {
 });
 
 // ADD a student
-router.post("/", async (req,res) => {
-    const student = req.body;
-    const newStudent = studentService.addStudent(student);
+router.post("/", async (req, res) => {
+  const student = req.body;
+  const newStudent = await studentService.addStudent(student);
 
-    res.status(201).send(newStudent);
-})
+  res.status(201).send(newStudent);
+});
 
-router.put("/:id", (req,res) => {
-    
-})
+// UPDATE a student
+router.put("/:id", async (req, res) => {
+  const id = req.params.id;
+  const student = req.body;
+  const updatedStudent = await studentService.updateStudent(id, student);
+
+  res.status(200).send("DENEME");
+});
+
+// DELETE a student
+router.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+  await studentService.deleteStudent(id);
+
+  res.status(200).send("Deleted!");
+});
+
+export { router };
