@@ -1,5 +1,14 @@
 import * as studentRepository from "../data/student-repository.js";
 
+// get Grades of Student
+export const getGradesOfStudent = async (pStudentId) => {
+  return await studentRepository.getGradesOfStudent(pStudentId);
+};
+// get Students of Mentor
+export const getStudentsOfMentor = async (pUser) => {
+  return await studentRepository.getStudentsOfMentor(pUser);
+};
+
 // get (all student)
 export const getStudents = async () => {
   return await studentRepository.getStudents();
