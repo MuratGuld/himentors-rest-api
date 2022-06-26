@@ -13,7 +13,7 @@ const sequelize = new Sequelize("himentorsdb", "root", "db1234", {
 
 const StudentLesson = sequelize.define("StudentLesson", {
   StudentId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     references: {
       model: Student,
       key: "id",

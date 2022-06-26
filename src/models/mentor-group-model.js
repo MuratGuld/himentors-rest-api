@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes } from "sequelize";
 import Group from "./group-model.js";
-import Student from "./student-model.js";
+import Mentor from "./mentor-model.js";
 
 const sequelize = new Sequelize("himentorsdb", "root", "db1234", {
   host: "localhost",
@@ -11,11 +11,11 @@ const sequelize = new Sequelize("himentorsdb", "root", "db1234", {
   },
 });
 
-const StudentGroup = sequelize.define("StudentGroup", {
-  StudentId: {
+const MentorGroup = sequelize.define("MentorGroup", {
+  MentorId: {
     type: DataTypes.STRING,
     references: {
-      model: Student,
+      model: Mentor,
       key: "id",
     },
   },
@@ -28,4 +28,4 @@ const StudentGroup = sequelize.define("StudentGroup", {
   },
 });
 
-export default StudentGroup;
+export default MentorGroup;

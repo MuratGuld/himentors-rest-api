@@ -13,7 +13,10 @@ const Group = sequelize.define("Group", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
+  ModuleId: {
+    type: DataTypes.STRING,
+  },
 });
 
 export default Group;

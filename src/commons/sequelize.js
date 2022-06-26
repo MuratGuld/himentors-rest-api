@@ -10,6 +10,7 @@ import Exam from "../models/exam-model.js";
 import StudentExam from "../models/student-exam-model.js";
 import StudentHomework from "../models/student-homework-model.js";
 import StudentLesson from "../models/student-lesson-model.js";
+import MentorGroup from "../models/mentor-group-model.js";
 
 const sequelize = new Sequelize("himentorsdb", "root", "db1234", {
   host: "localhost",
@@ -21,8 +22,6 @@ const sequelize = new Sequelize("himentorsdb", "root", "db1234", {
 });
 
 // associations
-Mentor.hasMany(Group);
-Group.belongsTo(Mentor);
 Module.hasMany(Group);
 Group.belongsTo(Module);
 Module.hasMany(Exam);
@@ -31,6 +30,8 @@ Module.hasMany(Homework);
 Homework.belongsTo(Module);
 Module.hasMany(Lesson);
 Lesson.belongsTo(Module);
+Mentor.belongsToMany(Group, { through: "MentorGroup" });
+Group.belongsToMany(Mentor, { through: "MentorGroup" });
 Student.belongsToMany(Group, { through: "StudentGroup" });
 Group.belongsToMany(Student, { through: "StudentGroup" });
 Student.belongsToMany(Lesson, { through: "StudentLesson" });
@@ -50,6 +51,7 @@ const connectToDatabase = async () => {
     await Homework.sync();
     await Lesson.sync();
     await Exam.sync();
+    await MentorGroup.sync();
     await StudentExam.sync();
     await StudentHomework.sync();
     await StudentLesson.sync();

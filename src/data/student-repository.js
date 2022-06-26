@@ -2,6 +2,7 @@ import Student from "../models/student-model.js";
 import Mentor from "../models/mentor-model.js";
 import Group from "../models/group-model.js";
 import StudentGroup from "../models/student-group-model.js";
+import MentorGroup from "../models/mentor-group-model.js";
 import { Sequelize, DataTypes } from "sequelize";
 
 const sequelize = new Sequelize("himentorsdb", "root", "db1234", {
@@ -55,9 +56,11 @@ export const getStudentsOfMentor = async (pUser) => {
     const relevantMentor = await Mentor.findOne({
       where: { email: pUser.email },
     });
-    const relevantGroup = await Group.findOne({
+
+    const relevantGroup = await MentorGroup.findOne({
       where: { MentorId: relevantMentor.id },
     });
+
     const studentsWithId = await StudentGroup.findAll({
       where: { GroupId: relevantGroup.id },
     });
@@ -73,6 +76,38 @@ export const getStudentsOfMentor = async (pUser) => {
     console.log(error);
   }
 };
+
+// GET  students by Group Id
+export const getStudentsByGroupId = async (pGroupId) => {
+  try {
+    const studentsWithId = await StudentGroup.findAll({
+      where: { GroupId: pGroupId },
+    });
+
+    const studentList = await Promise.all(
+      studentsWithId.map(async (student) => {
+        return await Student.findByPk(student.StudentId);
+      })
+    );
+
+    return await studentList;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// CHECK
+export async function isUserExisting(pEmail) {
+  const emailCount = await Student.count({
+    where: { email: pEmail },
+  });
+
+  if (emailCount == 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 // GET all students
 export const getStudents = async () => {
@@ -101,17 +136,15 @@ export const createStudent = async (pStudent) => {
   }
 };
 
-// PUT
+// PUT by Id
 export const updateStudent = async (pId, pStudent) => {
   try {
-    // return await Student.update(pStudent, {
-    //   where: { id: pId },
-    // });
     let student = await Student.findByPk(pId);
     student.set({
+      id: pStudent.id,
       first_name: pStudent.first_name,
       last_name: pStudent.last_name,
-      gender: pStudent.gender,
+      email: pStudent.email,
     });
     return await student.save();
   } catch (error) {

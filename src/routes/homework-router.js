@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
 
 // GET a homework
 router.get("/:id", async (req, res) => {
-  const id = Number(req.params.id);
+  const id = req.params.id;
   const homework = await homeworkService.getHomework(id);
 
   res.status(200).send(homework);

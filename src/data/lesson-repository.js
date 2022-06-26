@@ -30,9 +30,6 @@ export const createLesson = async (pLesson) => {
 // PUT
 export const updateLesson = async (pId, pLesson) => {
   try {
-    // return await Lesson.update(pLesson, {
-    //   where: { id: pId },
-    // });
     let lesson = await Lesson.findByPk(pId);
     lesson.set({
       name: pLesson.name,

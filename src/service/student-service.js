@@ -9,6 +9,11 @@ export const getStudentsOfMentor = async (pUser) => {
   return await studentRepository.getStudentsOfMentor(pUser);
 };
 
+// get Students by Group Id
+export const getStudentsByGroupId = async (pGroupId) => {
+  return await studentRepository.getStudentsByGroupId(pGroupId);
+};
+
 // get (all student)
 export const getStudents = async () => {
   return await studentRepository.getStudents();

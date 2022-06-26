@@ -30,9 +30,6 @@ export const createStudentGroup = async (pStudentGroup) => {
 // PUT
 export const updateStudentGroup = async (pId, pStudentGroup) => {
   try {
-    // return await StudentGroup.update(pStudentGroup, {
-    //   where: { id: pId },
-    // });
     let studentGroup = await StudentGroup.findByPk(pId);
     studentGroup.set({
       StudentId: pStudentGroup.StudentId,

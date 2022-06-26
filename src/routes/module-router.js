@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
 
 // GET a module
 router.get("/:id", async (req, res) => {
-  const id = Number(req.params.id);
+  const id = req.params.id;
   const module = await moduleService.getModule(id);
 
   res.status(200).send(module);

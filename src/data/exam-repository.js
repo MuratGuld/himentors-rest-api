@@ -1,5 +1,18 @@
 import Exam from "../models/exam-model.js";
 
+// CHECK
+export async function isExamExisting(pId) {
+  const emailCount = await Exam.count({
+    where: { id: pId },
+  });
+
+  if (emailCount == 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 // GET all Exams
 export const getExams = async () => {
   try {
@@ -27,16 +40,15 @@ export const createExam = async (pExam) => {
   }
 };
 
-// PUT
+// PUT by Id
 export const updateExam = async (pId, pExam) => {
   try {
-    // return await Exam.update(pGExam, {
-    //   where: { id: pId },
-    // });
     let exam = await Exam.findByPk(pId);
     exam.set({
+      id: pExam.id,
       name: pExam.name,
       date: pExam.date,
+      deadline: pExam.deadline,
       ModuleId: pExam.ModuleId,
     });
     return await exam.save();

@@ -10,6 +10,12 @@ const sequelize = new Sequelize("himentorsdb", "root", "db1234", {
 });
 
 const Homework = sequelize.define("Homework", {
+  id: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    primaryKey: true,
+  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -20,7 +26,10 @@ const Homework = sequelize.define("Homework", {
   },
   deadline: {
     type: DataTypes.DATE,
-    allowNull: false,
+    allowNull: true,
+  },
+  ModuleId: {
+    type: DataTypes.STRING,
   },
 });
 

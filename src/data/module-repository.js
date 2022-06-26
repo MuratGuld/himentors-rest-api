@@ -18,6 +18,15 @@ export const getModule = async (pId) => {
   }
 };
 
+// GET a Module if ACTIVE
+export const getActiveModule = async () => {
+  try {
+    return await Module.findOne({ where: { status: "ACTIVE" } });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // POST
 export const createModule = async (pModule) => {
   try {
@@ -30,14 +39,13 @@ export const createModule = async (pModule) => {
 // PUT
 export const updateModule = async (pId, pModule) => {
   try {
-    // return await Module.update(pModule, {
-    //   where: { id: pId },
-    // });
     let module = await Module.findByPk(pId);
     module.set({
+      id: pModule.id,
       name: pModule.name,
       start_date: pModule.start_date,
       end_date: pModule.end_date,
+      status: pModule.status,
     });
     return await module.save();
   } catch (error) {

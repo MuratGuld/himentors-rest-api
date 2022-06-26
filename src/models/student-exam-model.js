@@ -12,15 +12,21 @@ const sequelize = new Sequelize("himentorsdb", "root", "db1234", {
 });
 
 const StudentExam = sequelize.define("StudentExam", {
+  id: {
+    type: DataTypes.STRING,
+    unique: true,
+    primaryKey: true,
+    allowNull: false,
+  },
   StudentId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     references: {
       model: Student,
       key: "id",
     },
   },
   ExamId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     references: {
       model: Exam,
       key: "id",
@@ -28,6 +34,10 @@ const StudentExam = sequelize.define("StudentExam", {
   },
   grade: {
     type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+  status: {
+    type: DataTypes.STRING,
     allowNull: true,
   },
 });

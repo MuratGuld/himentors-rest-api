@@ -10,6 +10,12 @@ const sequelize = new Sequelize("himentorsdb", "root", "db1234", {
 });
 
 const Mentor = sequelize.define("Mentor", {
+  id: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: true,
+    unique: true,
+  },
   first_name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -19,10 +25,6 @@ const Mentor = sequelize.define("Mentor", {
     allowNull: false,
   },
   email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  gender: {
     type: DataTypes.STRING,
     allowNull: false,
   },

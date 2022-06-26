@@ -1,5 +1,18 @@
 import StudentExam from "../models/student-exam-model.js";
 
+// CHECK
+export async function isStudentExamExisting(pId) {
+  const emailCount = await StudentExam.count({
+    where: { id: pId },
+  });
+
+  if (emailCount == 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 // GET all StudentExams
 export const getStudentExams = async () => {
   try {
@@ -30,14 +43,12 @@ export const createStudentExam = async (pStudentExam) => {
 // PUT
 export const updateStudentExam = async (pId, pStudentExam) => {
   try {
-    // return await StudentExam.update(pStudentExam, {
-    //   where: { id: pId },
-    // });
     let studentExam = await StudentExam.findByPk(pId);
     studentExam.set({
       StudentId: pStudentExam.StudentId,
       ExamId: pStudentExam.ExamId,
       grade: pStudentExam.grade,
+      status: pStudentExam.status,
     });
     return await studentExam.save();
   } catch (error) {

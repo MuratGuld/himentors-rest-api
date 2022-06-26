@@ -1,5 +1,18 @@
 import StudentHomework from "../models/student-homework-model.js";
 
+// CHECK
+export async function isStudentHomeworkExisting(pId) {
+  const emailCount = await StudentHomework.count({
+    where: { id: pId },
+  });
+
+  if (emailCount == 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 // GET all StudentHomeworks
 export const getStudentHomeworks = async () => {
   try {
@@ -30,16 +43,12 @@ export const createStudentHomework = async (pStudentHomework) => {
 // PUT
 export const updateStudentHomework = async (pId, pStudentHomework) => {
   try {
-    // return await StudentHomework.update(pStudentHomework, {
-    //   where: { id: pId },
-    // });
     let studentHomework = await StudentHomework.findByPk(pId);
     studentHomework.set({
       StudentId: pStudentHomework.StudentId,
       HomeworkId: pStudentHomework.HomeworkId,
-      delivery_date: pStudentHomework.delivery_date,
-      check_date: pStudentHomework.check_date,
       grade: pStudentHomework.grade,
+      status: pStudentHomework.status,
     });
     return await studentHomework.save();
   } catch (error) {

@@ -10,6 +10,12 @@ const sequelize = new Sequelize("himentorsdb", "root", "db1234", {
 });
 
 const Module = sequelize.define("Module", {
+  id: {
+    type: DataTypes.STRING,
+    unique: true,
+    primaryKey: true,
+    allowNull: false,
+  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -23,7 +29,7 @@ const Module = sequelize.define("Module", {
     allowNull: true,
   },
   status: {
-    type: DataTypes.DATEONLY,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 });

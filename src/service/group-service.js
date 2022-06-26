@@ -1,8 +1,14 @@
 import * as groupRepository from "../data/group-repository.js";
 import * as studentGroupRepository from "../data/student-group-repository.js";
+import * as mentorGroupRepository from "../data/mentor-group-repository.js";
 
-// GROUP
+// GROUP 
 // *****
+// get (active groups)
+export const getActiveGroups = async () => {
+  return await groupRepository.getActiveGroups();
+};
+
 // get (all groups)
 export const getGroups = async () => {
   return await groupRepository.getGroups();
@@ -53,4 +59,32 @@ export const updateStudentGroup = async (pId, pStudentGroup) => {
 // delete
 export const deleteStudentGroup = async (pId) => {
   return await studentGroupRepository.deleteStudentGroup(pId);
+};
+
+
+// MENTOR GROUP
+// *************
+// get (all groups)
+export const getMentorGroups = async () => {
+  return await mentorGroupRepository.getMentorGroups();
+};
+
+// get (a group)
+export const getMentorGroup = async (pId) => {
+  return await mentorGroupRepository.getMentorGroup(pId);
+};
+
+// post
+export const addMentorGroup = async (pGroup) => {
+  return await mentorGroupRepository.createMentorGroup(pGroup);
+};
+
+// put
+export const updateMentorGroup = async (pId, pMentorGroup) => {
+  return await mentorGroupRepository.updateMentorGroup(pId, pMentorGroup);
+};
+
+// delete
+export const deleteMentorGroup = async (pId) => {
+  return await mentorGroupRepository.deleteMentorGroup(pId);
 };

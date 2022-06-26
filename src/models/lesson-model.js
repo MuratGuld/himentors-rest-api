@@ -18,6 +18,9 @@ const Lesson = sequelize.define("Lesson", {
     type: DataTypes.DATE,
     allowNull: false,
   },
+  ModuleId: {
+    type: DataTypes.STRING,
+  },
 });
 
 export default Lesson;

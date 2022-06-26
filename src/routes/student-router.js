@@ -4,7 +4,7 @@ import * as studentService from "../service/student-service.js";
 
 // get grades of student
 router.get("/grades/:id", async (req, res) => {
-  const studentId = Number(req.params.id);
+  const studentId = req.params.id;
 
   const studentGrades = await studentService.getGradesOfStudent(studentId);
   res.status(200).send(studentGrades);
@@ -23,6 +23,13 @@ router.post("/group-members", async (req, res) => {
   res.status(200).send(studentList);
 });
 
+// GET students of group
+router.get("/", async (req, res) => {
+  const groupId = req.query.groupId;
+  const students = await studentService.getStudentsByGroupId(groupId);
+  res.status(200).send(students);
+});
+
 // GET all students
 router.get("/", async (req, res) => {
   const students = await studentService.getStudents();
@@ -31,7 +38,7 @@ router.get("/", async (req, res) => {
 
 // GET a student
 router.get("/:id", async (req, res) => {
-  const id = Number(req.params.id);
+  const id = req.params.id;
   const student = await studentService.getStudent(id);
 
   res.status(200).send(student);

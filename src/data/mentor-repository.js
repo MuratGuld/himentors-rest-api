@@ -47,19 +47,15 @@ export const createMentor = async (pMentor) => {
   }
 };
 
-// PUT
+// PUT by Id
 export const updateMentor = async (pId, pMentor) => {
   try {
-    // return await Mentor.update(pMentor, {
-    //   where: { id: pId },
-    // });
     let mentor = await Mentor.findByPk(pId);
     mentor.set({
+      id: pMentor.id,
       first_name: pMentor.first_name,
       last_name: pMentor.last_name,
-      gender: pMentor.gender,
       email: pMentor.email,
-      role: pMentor.role,
     });
     return await mentor.save();
   } catch (error) {

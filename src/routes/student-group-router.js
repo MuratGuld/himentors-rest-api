@@ -10,10 +10,10 @@ router.get("/", async (req, res) => {
 
 // GET a student group
 router.get("/:id", async (req, res) => {
-  const id = Number(req.params.id);
+  const id = req.params.id;
   const studentGroup = await groupService.getStudentGroup(id);
 
-  res.status(200).send(group);
+  res.status(200).send(studentGroup);
 });
 
 // ADD a student group

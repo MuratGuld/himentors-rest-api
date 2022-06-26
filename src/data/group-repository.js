@@ -1,6 +1,18 @@
 import Group from "../models/group-model.js";
+import Module from "../models/module-model.js";
 
-// GET all groups
+// GET active groups
+export const getActiveGroups = async () => {
+  try {
+    const activeModule = await Module.findOne({ where: { status: "ACTIVE" } });
+    return await Group.findAll({
+      where: { ModuleId: activeModule.id },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getGroups = async () => {
   try {
     return await Group.findAll();
@@ -30,13 +42,9 @@ export const createGroup = async (pGroup) => {
 // PUT
 export const updateGroup = async (pId, pGroup) => {
   try {
-    // return await Group.update(pGroup, {
-    //   where: { id: pId },
-    // });
     let group = await Group.findByPk(pId);
     group.set({
       name: pGroup.name,
-      MentorId: pGroup.MentorId,
       ModuleId: pGroup.ModuleId,
     });
     return await group.save();

@@ -10,6 +10,12 @@ const sequelize = new Sequelize("himentorsdb", "root", "db1234", {
 });
 
 const Student = sequelize.define("Student", {
+  id: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: true,
+    unique: true,
+  },
   first_name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -18,7 +24,7 @@ const Student = sequelize.define("Student", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  gender: {
+  email: {
     type: DataTypes.STRING,
     allowNull: false,
   },

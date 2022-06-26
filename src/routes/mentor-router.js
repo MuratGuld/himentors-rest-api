@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 
 // GET a mentor
 router.get("/:id", async (req, res) => {
-  const id = Number(req.params.id);
+  const id = req.params.id;
   const mentor = await mentorService.getMentor(id);
 
   res.status(200).send(mentor);
