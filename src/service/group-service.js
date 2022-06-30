@@ -2,11 +2,39 @@ import * as groupRepository from "../data/group-repository.js";
 import * as studentGroupRepository from "../data/student-group-repository.js";
 import * as mentorGroupRepository from "../data/mentor-group-repository.js";
 
-// GROUP 
+// GROUP
 // *****
 // get (active groups)
 export const getActiveGroups = async () => {
   return await groupRepository.getActiveGroups();
+};
+
+// add group with members
+export const addGroupWithMembers = async (pGroup) => {
+  const newGroup = await groupRepository.createGroup({
+    name: pGroup.name,
+    ModuleId: pGroup.ModuleId,
+  });
+
+  await Promise.all(
+    pGroup.MentorId.map(async (mentorId) => {
+      await mentorGroupRepository.createMentorGroup({
+        GroupId: newGroup.id,
+        MentorId: mentorId,
+      });
+    })
+  );
+
+  await Promise.all(
+    pGroup.StudentId.map(async (studentId) => {
+      await studentGroupRepository.createStudentGroup({
+        GroupId: newGroup.id,
+        StudentId: studentId,
+      });
+    })
+  );
+
+  return await newGroup;
 };
 
 // get (all groups)
@@ -60,7 +88,6 @@ export const updateStudentGroup = async (pId, pStudentGroup) => {
 export const deleteStudentGroup = async (pId) => {
   return await studentGroupRepository.deleteStudentGroup(pId);
 };
-
 
 // MENTOR GROUP
 // *************

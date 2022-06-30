@@ -1,4 +1,15 @@
 import Mentor from "../models/mentor-model.js";
+import MentorGroup from "../models/mentor-group-model.js";
+import { Sequelize, DataTypes } from "sequelize";
+
+const sequelize = new Sequelize("himentorsdb", "root", "db1234", {
+  host: "localhost",
+  dialect: "mysql",
+  dialectOptions: {},
+  define: {
+    freezeTableName: true,
+  },
+});
 
 // CHECK
 export async function isUserExisting(pEmail) {
@@ -20,6 +31,20 @@ export async function isUserExisting(pEmail) {
   }
 }
 
+// GET mentors without group
+export const getMentorsWithoutGroup = async () => {
+  try {
+    const [mentorsWithoutGroup, metadata] =
+      await sequelize.query(`select * from himentorsdb.mentor 
+      where mentor.id not in (SELECT MentorId from himentorsdb.mentorgroup) and 
+      not role = 'admin'`);
+
+    return await mentorsWithoutGroup;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // GET all mentors
 export const getMentors = async () => {
   try {
@@ -29,7 +54,7 @@ export const getMentors = async () => {
   }
 };
 
-// GET a movie
+// GET a mentor
 export const getMentor = async (pId) => {
   try {
     return await Mentor.findByPk(pId);

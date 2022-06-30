@@ -77,7 +77,7 @@ export const getStudentsOfMentor = async (pUser) => {
   }
 };
 
-// GET  students by Group Id
+// GET  Students by Group Id
 export const getStudentsByGroupId = async (pGroupId) => {
   try {
     const studentsWithId = await StudentGroup.findAll({
@@ -108,6 +108,19 @@ export async function isUserExisting(pEmail) {
     return true;
   }
 }
+
+// GET students without group
+export const getStudentsWithoutGroup = async () => {
+  try {
+    const [studentsWithoutGroup, metadata] =
+      await sequelize.query(`select * from himentorsdb.student 
+      where student.id not in (SELECT StudentId from himentorsdb.studentgroup)`);
+
+    return await studentsWithoutGroup;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // GET all students
 export const getStudents = async () => {

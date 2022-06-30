@@ -8,6 +8,11 @@ router.get("/", async (req, res) => {
   res.status(200).send(modules);
 });
 
+// GET active module
+router.get("/active-module", async (req, res) => {
+  const activeModule = await moduleService.getActiveModule();
+  res.status(200).send(activeModule);
+});
 // GET a module
 router.get("/:id", async (req, res) => {
   const id = req.params.id;

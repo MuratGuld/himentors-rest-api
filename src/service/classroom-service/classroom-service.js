@@ -228,8 +228,8 @@ function getHomeworks(auth) {
                           homework.dueDate.year,
                           homework.dueDate.month - 1,
                           homework.dueDate.day,
-                          (homework.dueTime.hours + 2) % 24,
-                          homework.dueTime.minutes
+                          homework.dueTime.hours,
+                          homework.dueTime.minutes + 120
                         ),
                         ModuleId: activeModule.id,
                       });
@@ -242,8 +242,8 @@ function getHomeworks(auth) {
                           homework.dueDate.year,
                           homework.dueDate.month - 1,
                           homework.dueDate.day,
-                          (homework.dueTime.hours + 2) % 24,
-                          homework.dueTime.minutes
+                          homework.dueTime.hours,
+                          homework.dueTime.minutes + 120
                         ),
                         ModuleId: activeModule.id,
                       });
@@ -290,8 +290,8 @@ function getExams(auth) {
                         exam.dueDate.year,
                         exam.dueDate.month - 1,
                         exam.dueDate.day,
-                        (exam.dueTime.hours + 2) % 24,
-                        exam.dueTime.minutes
+                        exam.dueTime.hours,
+                        exam.dueTime.minutes + 120
                       ),
                       ModuleId: activeModule.id,
                     });
@@ -304,8 +304,8 @@ function getExams(auth) {
                         exam.dueDate.year,
                         exam.dueDate.month - 1,
                         exam.dueDate.day,
-                        (exam.dueTime.hours + 2) % 24,
-                        exam.dueTime.minutes
+                        exam.dueTime.hours,
+                        exam.dueTime.minutes + 120
                       ),
                       ModuleId: activeModule.id,
                     });

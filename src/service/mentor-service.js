@@ -5,6 +5,11 @@ export const checkUser = async (pUser) => {
   return await mentorRepository.isUserExisting(pUser.email);
 };
 
+// get Mentors without group
+export const getMentorsWithoutGroup = async () => {
+  return await mentorRepository.getMentorsWithoutGroup();
+};
+
 // get (all mentors)
 export const getMentors = async () => {
   return await mentorRepository.getMentors();

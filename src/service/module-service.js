@@ -5,6 +5,10 @@ export const getModules = async () => {
   return await moduleRepository.getModules();
 };
 
+// get (active module)
+export const getActiveModule = async (pId) => {
+  return await moduleRepository.getActiveModule();
+};
 // get (a module)
 export const getModule = async (pId) => {
   return await moduleRepository.getModule(pId);

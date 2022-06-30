@@ -15,6 +15,12 @@ router.post("/check", async (req, res) => {
   res.status(200).send(status);
 });
 
+// GET mentors without group
+router.get("/mentors-without-group", async (req, res) => {
+  const mentors = await mentorService.getMentorsWithoutGroup();
+  res.status(200).send(mentors);
+});
+
 // GET all mentors
 router.get("/", async (req, res) => {
   const mentors = await mentorService.getMentors();

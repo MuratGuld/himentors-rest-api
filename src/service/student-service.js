@@ -14,6 +14,11 @@ export const getStudentsByGroupId = async (pGroupId) => {
   return await studentRepository.getStudentsByGroupId(pGroupId);
 };
 
+// get Students without group
+export const getStudentsWithoutGroup = async () => {
+  return await studentRepository.getStudentsWithoutGroup();
+};
+
 // get (all student)
 export const getStudents = async () => {
   return await studentRepository.getStudents();

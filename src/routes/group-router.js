@@ -8,6 +8,14 @@ router.get("/active-groups", async (req, res) => {
   res.status(200).send(activeGroups);
 });
 
+// GET new group with mentor and students
+router.post("/active-groups", async (req, res) => {
+  const group = req.body;
+  const newGroup = await groupService.addGroupWithMembers(group);
+
+  res.status(201).send(newGroup);
+});
+
 router.get("/", async (req, res) => {
   const groups = await groupService.getGroups();
   res.status(200).send(groups);

@@ -30,6 +30,12 @@ router.get("/", async (req, res) => {
   res.status(200).send(students);
 });
 
+// GET students without group
+router.get("/students-without-group", async (req, res) => {
+  const students = await studentService.getStudentsWithoutGroup();
+  res.status(200).send(students);
+});
+
 // GET all students
 router.get("/", async (req, res) => {
   const students = await studentService.getStudents();
