@@ -21,6 +21,14 @@ router.get("/", async (req, res) => {
   res.status(200).send(groups);
 });
 
+// DELETE a group with Members
+router.delete("/active-groups/:id", async (req, res) => {
+  const id = req.params.id;
+  await groupService.deleteGroupWithMembers(id);
+
+  res.status(200).send("Deleted!");
+});
+
 // GET a group
 router.get("/:id", async (req, res) => {
   const id = req.params.id;

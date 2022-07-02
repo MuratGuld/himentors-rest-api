@@ -21,6 +21,13 @@ router.get("/mentors-without-group", async (req, res) => {
   res.status(200).send(mentors);
 });
 
+// GET mentors of group
+router.get("/mentors-of-group", async (req, res) => {
+  const groupId = req.query.groupId;
+  const mentors = await mentorService.getMentorsByGroupId(groupId);
+  res.status(200).send(mentors);
+});
+
 // GET all mentors
 router.get("/", async (req, res) => {
   const mentors = await mentorService.getMentors();

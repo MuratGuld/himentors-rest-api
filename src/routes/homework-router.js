@@ -2,6 +2,18 @@ import express from "express";
 const router = express.Router();
 import * as homeworkService from "../service/homework-service.js";
 
+// GET all homeworks with grade
+router.get("/homeworks-with-grade", async (req, res) => {
+  const homeworks = await homeworkService.getHomeworksWithGrade();
+  res.status(200).send(homeworks);
+});
+
+// GET all homeworks with grade of week
+router.get("/homeworks-with-grade-week", async (req, res) => {
+  const homeworks = await homeworkService.getHomeworksWithGradeOfWeek();
+  res.status(200).send(homeworks);
+});
+
 // GET all homeworks
 router.get("/", async (req, res) => {
   const homeworks = await homeworkService.getHomeworks();

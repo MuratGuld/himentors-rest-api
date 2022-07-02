@@ -1,7 +1,7 @@
 import cron from "node-cron";
 import shell from "shelljs";
 
-cron.schedule("30 12 * * * *", function () {
+cron.schedule("* * * * * *", function () {
   if (
     shell.exec("node ./src/service/classroom-service/classroom-service.js")
       .code !== 0

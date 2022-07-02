@@ -45,6 +45,25 @@ export const getMentorsWithoutGroup = async () => {
   }
 };
 
+// GET  Mentor by Group Id
+export const getMentorsByGroupId = async (pGroupId) => {
+  try {
+    const mentorsWithId = await MentorGroup.findAll({
+      where: { GroupId: pGroupId },
+    });
+
+    const mentorList = await Promise.all(
+      mentorsWithId.map(async (mentor) => {
+        return await Mentor.findByPk(mentor.MentorId);
+      })
+    );
+
+    return await mentorList;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // GET all mentors
 export const getMentors = async () => {
   try {

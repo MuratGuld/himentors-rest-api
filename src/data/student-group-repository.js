@@ -51,3 +51,14 @@ export const deleteStudentGroup = async (pId) => {
     console.log(error);
   }
 };
+
+// DELETE by GroupId
+export const deleteStudentGroupByGroupId = async (pGroupId) => {
+  try {
+    await StudentGroup.destroy({
+      where: { GroupId: pGroupId },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

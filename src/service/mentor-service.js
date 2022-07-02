@@ -10,6 +10,11 @@ export const getMentorsWithoutGroup = async () => {
   return await mentorRepository.getMentorsWithoutGroup();
 };
 
+// get Mentors by Group Id
+export const getMentorsByGroupId = async (pGroupId) => {
+  return await mentorRepository.getMentorsByGroupId(pGroupId);
+};
+
 // get (all mentors)
 export const getMentors = async () => {
   return await mentorRepository.getMentors();

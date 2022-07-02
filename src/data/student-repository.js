@@ -41,6 +41,16 @@ export const getGradesOfStudent = async (pStudentId) => {
       join himentorsdb.exam as e
       on  se.ExamId= e.id
       where s.id=${pStudentId}
+      union
+      select  s.id, s.first_name, s.last_name, (avg(sh.grade)*50+avg(sl.participate_status)*100*10+avg(se.grade)*40)/100, "Final Grade", "9999-01-01 00:00:00", "" as type
+      FROM himentorsdb.student as s
+      join himentorsdb.studenthomework as sh 
+      on s.id = sh.StudentId 
+      join himentorsdb.studentlesson as sl 
+      on s.id = sl.StudentId 
+      join himentorsdb.studentexam as se 
+      on s.id = se.StudentId 
+      where s.id=${pStudentId}
       order by id, date`
     );
 
@@ -62,7 +72,7 @@ export const getStudentsOfMentor = async (pUser) => {
     });
 
     const studentsWithId = await StudentGroup.findAll({
-      where: { GroupId: relevantGroup.id },
+      where: { GroupId: relevantGroup.GroupId },
     });
 
     const studentList = await Promise.all(

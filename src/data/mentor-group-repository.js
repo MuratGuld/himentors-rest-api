@@ -51,3 +51,14 @@ export const deleteMentorGroup = async (pId) => {
     console.log(error);
   }
 };
+
+// DELETE by GroupId
+export const deleteMentorGroupByGroupId = async (pGroupId) => {
+  try {
+    await MentorGroup.destroy({
+      where: { GroupId: pGroupId },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

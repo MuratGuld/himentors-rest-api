@@ -24,7 +24,7 @@ router.post("/group-members", async (req, res) => {
 });
 
 // GET students of group
-router.get("/", async (req, res) => {
+router.get("/students-of-group", async (req, res) => {
   const groupId = req.query.groupId;
   const students = await studentService.getStudentsByGroupId(groupId);
   res.status(200).send(students);

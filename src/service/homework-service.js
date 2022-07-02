@@ -3,7 +3,15 @@ import * as studentHomeworkRepository from "../data/student-homework-repository.
 
 // HOMEWORKS
 // *********
+// get Homeworks With Grade
+export const getHomeworksWithGrade = async () => {
+  return await homeworkRepository.getHomeworksWithGrade();
+};
 
+// get Homeworks With Grade Of Week
+export const getHomeworksWithGradeOfWeek = async () => {
+  return await homeworkRepository.getHomeworksWithGradeOfWeek();
+};
 // get (all homeworks)
 export const getHomeworks = async () => {
   return await homeworkRepository.getHomeworks();

@@ -37,6 +37,13 @@ export const addGroupWithMembers = async (pGroup) => {
   return await newGroup;
 };
 
+// delete a Group with members
+export const deleteGroupWithMembers = async (pGroupId) => {
+  await mentorGroupRepository.deleteMentorGroupByGroupId(pGroupId);
+  await studentGroupRepository.deleteStudentGroupByGroupId(pGroupId);
+  return await groupRepository.deleteGroup(pGroupId);
+};
+
 // get (all groups)
 export const getGroups = async () => {
   return await groupRepository.getGroups();
